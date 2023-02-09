@@ -1,0 +1,24 @@
+{
+  "name": "@hexlet/code",
+  "version": "1.0.0",
+  "description": "differences between some shit",
+  "main": "gendiff.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "bin": "bin/gendiff.js",
+  "type": "module",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/antoshhkii/frontend-project-46.git"
+  },
+  "author": "antoshka",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/antoshhkii/frontend-project-46/issues"
+  },
+  "dependencies": {
+    "commander": "^9.5.0"
+  },
+  "homepage": "https://github.com/antoshhkii/frontend-project-46#readme"
+}
