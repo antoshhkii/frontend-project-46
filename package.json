@@ -1,12 +1,14 @@
 {
   "name": "@hexlet/code",
   "version": "1.0.0",
-  "description": "differences between some shit",
+  "description": "[![Actions Status](https://github.com/antoshhkii/frontend-project-46/workflows/hexlet-check/badge.svg)](https://github.com/antoshhkii/frontend-project-46/actions)",
   "main": "gendiff.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "bin": "bin/gendiff.js",
+  "bin": {
+    "gendiff": "node bin/gendiff.js"
+  },
   "type": "module",
   "repository": {
     "type": "git",
