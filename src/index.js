@@ -32,5 +32,6 @@ export const genDiff = (filepath1, filepath2) => {
     }
     return final;
   }, '');
+  console.log(`{${result}\n}`);
   return `{${result}\n}`;
 };

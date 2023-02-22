@@ -2,9 +2,16 @@ import fs from 'fs';
 import { test, expect } from '@jest/globals';
 import { genDiff, getPath } from '../src/index.js';
 
-const pathToExpect = getPath('./__fixtures__/expected.txt');
-const expectedFile = fs.readFileSync(pathToExpect, 'utf-8');
+const firstExpectedFile = fs.readFileSync(getPath('./__fixtures__/expected_files/gendiff1-2.txt'), 'utf-8');
+const secondExpectedFile = fs.readFileSync(getPath('./__fixtures__/expected_files/gendiff3-4.txt'), 'utf-8');
 
-test('genDiff', () => {
-  expect(genDiff('./__fixtures__/file1.json', './__fixtures__/file2.json')).toEqual(expectedFile);
+const firstStrPath = ['./__fixtures__/json_test_files/file1.json', './__fixtures__/json_test_files/file2.json'];
+const secondStrPath = ['./__fixtures__/json_test_files/file3.json', './__fixtures__/json_test_files/file4.json'];
+
+test('genDiff.json1', () => {
+  expect(genDiff(firstStrPath[0], firstStrPath[1])).toEqual(firstExpectedFile);
+});
+
+test('genDiff.json2', () => {
+  expect(genDiff(secondStrPath[0], secondStrPath[1])).toEqual(secondExpectedFile);
 });
