@@ -1,4 +1,5 @@
 import path from 'path';
+import parse from 'yaml';
 import fs from 'fs';
 import _ from 'lodash';
 

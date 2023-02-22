@@ -21,7 +21,8 @@
   },
   "dependencies": {
     "commander": "^9.5.0",
-    "lodash": "^4.17  .21"
+    "lodash": "^4.17  .21",
+    "yaml": "^2.2.1"
   },
   "homepage": "https://github.com/antoshhkii/frontend-project-46#readme",
   "devDependencies": {
