@@ -2,9 +2,9 @@ import path from 'path';
 import fs from 'fs';
 import _ from 'lodash';
 
-const getPath = (file) => path.resolve(process.cwd(), file);
+export const getPath = (file) => path.resolve(process.cwd(), file);
 
-const genDiff = (filepath1, filepath2) => {
+export const genDiff = (filepath1, filepath2) => {
   // const firstPath = JSON.parse(fs.readFileSync(filepath1, 'utf-8'));
   // const secondPath = JSON.parse(fs.readFileSync(filepath2, 'utf-8'));
   // const firstObject = getPath(firstPath);
@@ -22,18 +22,16 @@ const genDiff = (filepath1, filepath2) => {
   const result = sortedKeys.reduce((acc, el) => {
     let final = acc;
     if (!Object.hasOwn(secondObject, el)) {
-      final += `\n - ${el}: ${firstObject[el]}`;
+      final += `\n  - ${el}: ${firstObject[el]}`;
     } else if (firstObject[el] === secondObject[el]) {
-      final += `\n   ${el}: ${firstObject[el]}`;
+      final += `\n    ${el}: ${firstObject[el]}`;
     } else if (!Object.hasOwn(firstObject, el)) {
-      final += `\n + ${el}: ${secondObject[el]}`;
+      final += `\n  + ${el}: ${secondObject[el]}`;
     } else if (firstObject[el] !== secondObject[el]) {
-      final += `\n - ${el}: ${firstObject[el]}\n + ${el}: ${secondObject[el]}`;
+      final += `\n  - ${el}: ${firstObject[el]}\n  + ${el}: ${secondObject[el]}`;
     }
     return final;
   }, '');
   console.log(`{${result}\n}`);
   return result;
 };
-
-export default genDiff;
