@@ -1,20 +1,9 @@
-import path from 'path';
-import parse from 'yaml';
-import fs from 'fs';
 import _ from 'lodash';
+import { parse } from './parse.js';
 
-export const getPath = (file) => path.resolve(process.cwd(), file);
-
-export const genDiff = (filepath1, filepath2) => {
-  // const firstPath = JSON.parse(fs.readFileSync(filepath1, 'utf-8'));
-  // const secondPath = JSON.parse(fs.readFileSync(filepath2, 'utf-8'));
-  // const firstObject = getPath(firstPath);
-  // const secondObject = getPath(secondPath);
-  const firstPath = getPath(filepath1);
-  const secondPath = getPath(filepath2);
-  const firstObject = JSON.parse(fs.readFileSync(firstPath, 'utf-8'));
-  const secondObject = JSON.parse(fs.readFileSync(secondPath, 'utf-8'));
-
+const genDiff = (filepath1, filepath2) => {
+  const firstObject = parse(filepath1);
+  const secondObject = parse(filepath2);
   const firstKeys = Object.keys(firstObject);
   const secondKeys = Object.keys(secondObject);
   const commonKeys = _.union(firstKeys, secondKeys);
@@ -33,6 +22,7 @@ export const genDiff = (filepath1, filepath2) => {
     }
     return final;
   }, '');
-  console.log(`{${result}\n}`);
   return `{${result}\n}`;
 };
+
+export default genDiff;
