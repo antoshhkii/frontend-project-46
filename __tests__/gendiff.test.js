@@ -17,14 +17,3 @@ test('YAML & YML files are parsing', () => {
   expect(genDiff(makePath('file3.yaml'), makePath('file3.yml')))
     .toEqual(makePath('gendiffYAML-YML.txt'));
 });
-
-//  test('Throw Errors for parsers', () => {
-// expect(genDiff(makePath('file1.yaml'), makePath('file2.yaml')))
-// .toEqual(makePath('gendiffYAML1-2.txt'));
-//  expect(genDiff(makePath('file1.yaml'), makePath('file2.yaml')))
-// .toEqual(makePath('gendiffYAML1-2.txt'));
-//  expect(genDiff(makePath('file1.yaml'), makePath('file2.yaml')))
-// .toEqual(makePath('gendiffYAML1-2.txt'));
-//  expect(genDiff(makePath('file1.yaml'), makePath('file2.yaml')))
-// .toEqual(makePath('gendiffYAML1-2.txt'));
-//  });
