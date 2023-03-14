@@ -1,6 +1,11 @@
-import { parse, makePath, readFile } from './parse.js';
+import fs from 'fs';
+import path from 'path';
+import parse from './parse.js';
 import formatter from './formatters/index.js';
 import makeTree from './tree.js';
+
+const readFile = (filePath) => fs.readFileSync(filePath, 'utf-8');
+const makePath = (filepath) => path.resolve(process.cwd(), filepath);
 
 const genDiff = (filepath1, filepath2, formatname = 'stylish') => {
   const pathToFile1 = makePath(filepath1);
