@@ -1,19 +1,25 @@
-import { test, expect } from '@jest/globals';
-import { genDiff, makePath } from '../library.js';
+import path, { dirname } from 'path';
+import url from 'url';
+import { test, expect, describe } from '@jest/globals';
+import { genDiff, readFile } from '../library.js';
 
-test('JSON files are parsing', () => {
-  expect(genDiff(makePath('file1.json'), makePath('file2.json')))
-    .toEqual(makePath('gendiffJSON1-2.txt'));
+const __filename = url.fileURLToPath(import.meta.url);
+const __dirname = dirname(__filename);
 
-  expect(genDiff(makePath('file3.json'), makePath('file4.json')))
-    .toEqual(makePath('gendiffJSON3-4.txt'));
-});
+const decipherFile = (filename) => readFile(path.join(__dirname, '..', '__fixtures__', filename));
 
-test('YAML & YML files are parsing', () => {
-  expect(genDiff(makePath('file1.yaml'), makePath('file2.yaml')))
-    .toEqual(makePath('gendiffYAML1-2.txt'));
-  expect(genDiff(makePath('file1.yml'), makePath('file2.yml')))
-    .toEqual(makePath('gendiffYAML3-4.txt'));
-  expect(genDiff(makePath('file3.yaml'), makePath('file3.yml')))
-    .toEqual(makePath('gendiffYAML-YML.txt'));
+const file1OutputDefault = decipherFile('fileOutput_.txt');
+const file1OutputPlain = decipherFile('fileOutput_plain.txt');
+const file1OutputJson = decipherFile('fileOutput_json.txt');
+const file1 = './__fixtures__/file1.json';
+const file2 = './__fixtures__/file2.json';
+const file3 = './__fixtures__/file1.yml';
+const file4 = './__fixtures__/file2.yml';
+
+describe('comparing  files', () => {
+  test('simple using', () => {
+    expect(genDiff(file1, file2)).toEqual(file1OutputDefault);
+    expect(genDiff(file3, file4, 'plain')).toEqual(file1OutputPlain);
+    expect(genDiff(file3, file4, 'json')).toEqual(file1OutputJson);
+  });
 });

@@ -1,28 +1,19 @@
-import _ from 'lodash';
-import { parse } from './parse.js';
+import { parse, makePath, readFile } from './parse.js';
+import formatter from './formatters/index.js';
+import makeTree from './tree.js';
 
-const genDiff = (filepath1, filepath2) => {
-  const firstObject = parse(filepath1);
-  const secondObject = parse(filepath2);
-  const firstKeys = Object.keys(firstObject);
-  const secondKeys = Object.keys(secondObject);
-  const commonKeys = _.union(firstKeys, secondKeys);
-  const sortedKeys = commonKeys.sort();
+const genDiff = (filepath1, filepath2, formatname = 'stylish') => {
+  const pathToFile1 = makePath(filepath1);
+  const pathToFile2 = makePath(filepath2);
 
-  const result = sortedKeys.reduce((acc, el) => {
-    let final = acc;
-    if (!Object.hasOwn(secondObject, el)) {
-      final += `\n  - ${el}: ${firstObject[el]}`;
-    } else if (firstObject[el] === secondObject[el]) {
-      final += `\n    ${el}: ${firstObject[el]}`;
-    } else if (!Object.hasOwn(firstObject, el)) {
-      final += `\n  + ${el}: ${secondObject[el]}`;
-    } else if (firstObject[el] !== secondObject[el]) {
-      final += `\n  - ${el}: ${firstObject[el]}\n  + ${el}: ${secondObject[el]}`;
-    }
-    return final;
-  }, '');
-  return `{${result}\n}`;
+  const dataFile1 = readFile(pathToFile1);
+  const dataFile2 = readFile(pathToFile2);
+
+  const parsedFile1 = parse(dataFile1);
+  const parsedFile2 = parse(dataFile2);
+
+  const generalDifference = makeTree(parsedFile1, parsedFile2);
+  return formatter(generalDifference, formatname);
 };
 
 export default genDiff;

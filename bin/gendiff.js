@@ -7,5 +7,8 @@ program
   .usage('[options] <filepath1> <filepath2>')
   .arguments('<file1> <file2>')
   .version('0.0.1', '-v, --version', 'output the version number')
-  .action((file1, file2) => { genDiff(file1, file2); })
+  .action((filepath1, filepath2) => {
+    const option = program.opts();
+    console.log(genDiff(filepath1, filepath2, option.format));
+  })
   .parse();
