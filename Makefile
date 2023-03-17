@@ -1,6 +1,6 @@
 git: 
 	git add .
-	git commit -m 'minor fixes'
+	git commit -m 'i think it works'
 	git push
 
 link:

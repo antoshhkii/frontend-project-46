@@ -34,7 +34,8 @@ const stylish = (tree, spacesCount = 4, replacer = ' ') => {
       }
       return getStylishLine(status, indent, key, value, depth);
     });
-    return ['{', ...lines, `${bracketIndent}}`].join('\n');
+    return ['{', ...lines, `${bracketIndent}}`]
+      .join('\n');
   };
   return iter(tree, 1);
 };

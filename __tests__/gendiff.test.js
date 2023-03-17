@@ -1,14 +1,16 @@
 import path, { dirname } from 'path';
 import url from 'url';
+import fs from 'fs';
 import { test, expect, describe } from '@jest/globals';
-import { genDiff, readFile } from '../library.js';
+import { genDiff } from '../library.js';
 
 const __filename = url.fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
+const readFile = (filePath) => fs.readFileSync(filePath, 'utf-8');
 const decipherFile = (filename) => readFile(path.join(__dirname, '..', '__fixtures__', filename));
 
-const file1OutputDefault = decipherFile('fileOutput_.txt');
+const file1OutputDefault = decipherFile('fileOutput.txt');
 const file1OutputPlain = decipherFile('fileOutput_plain.txt');
 const file1OutputJson = decipherFile('fileOutput_json.txt');
 const file1 = './__fixtures__/file1.json';
