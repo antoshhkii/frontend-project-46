@@ -6,6 +6,9 @@ git:
 link:
 	npm link
 
+install:
+	npm ci
+
 test:
 	npm test
 
